@@ -48,9 +48,9 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
-  import CustomerModal from "@/components/Customer/AddCustomer.vue";
-  import EditCustomerModal from "@/components/Customer/EditCustomer.vue";
-  import CustomerDetailsModal from "@/components/Customer/CustomerDetail.vue";
+  import CustomerModal from "@/components/customer/AddCustomer.vue";
+  import EditCustomerModal from "@/components/customer/EditCustomer.vue";
+  import CustomerDetailsModal from "@/components/customer/CustomerDetail.vue";
   
   const customers = ref([]);
   const showAddModal = ref(false);
