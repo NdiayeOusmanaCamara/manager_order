@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CustomerAdd from "@/components/Customer/AddCustomer.vue";
+import CustomerAdd from "@/components/customer/customer/AddCustomer.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
