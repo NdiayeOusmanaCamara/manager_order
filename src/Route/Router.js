@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import ListCustomers from "@/components/Customer/ListCustomers.vue";
-import CustomerAdd from "@/components/Customer/AddCustomer.vue";
-import EditCustomer from "@/components/Customer/EditCustomer.vue";
-import CustomerDetail from "@/components/Customer/CustomerDetail.vue";
+import ListCustomers from '/components/customer/ListCustomers.vue';
+import CustomerAdd from "@/components/customer/AddCustomer.vue";
+import EditCustomer from "@/components/customer/EditCustomer.vue";
+import CustomerDetail from "@/components/customer/CustomerDetail.vue";
 import ListOrders from "@/components/Orders/ListOrders.vue";
 import EditOrder from "@/components/Orders/EditOrder.vue";
 import AddOrder from "@/components/Orders/AddOrder.vue";
