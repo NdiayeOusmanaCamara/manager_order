@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import ListCustomers from '/components/customer/ListCustomers.vue';
+import ListCustomers from '@customer/ListCustomers.vue';
 import CustomerAdd from "@/components/customer/AddCustomer.vue";
 import EditCustomer from "@/components/customer/EditCustomer.vue";
 import CustomerDetail from "@/components/customer/CustomerDetail.vue";
