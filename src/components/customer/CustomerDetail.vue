@@ -30,8 +30,7 @@ const props = defineProps({
   }
 });
 </script>
-
-<style scoped>
+<style setup>
 .modal-position {
   margin-top: 100px;
 }

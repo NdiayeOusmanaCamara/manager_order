@@ -1,25 +1,25 @@
-
 import { createRouter, createWebHistory } from 'vue-router';
 import ListCustomer from "@/components/Customer/ListCustomers.vue";
-import AddCustomer from "@/components/Customer/AddCustomer.vue";
+import CustomerAdd from "@/components/Customer/AddCustomer.vue";
 import EditCustomer from "@/components/Customer/EditCustomer.vue";
 import CustomerDetail from "@/components/Customer/CustomerDetail.vue";
 import ListOrders from "@/components/Orders/ListOrders.vue";
-import AddOrder from "@/components/Orders/AddOrder.vue";
 import EditOrder from "@/components/Orders/EditOrder.vue";
+import AddOrder from "@/components/Orders/AddOrder.vue";
 import OrderDetail from "@/components/Orders/OrderDetail.vue";
 import ListProduct from "@/components/Products/ListProduct.vue";
-import AddProduct from "@/components/Products/ProductAdd.vue";
 import EditProduct from "@/components/Products/EditProduct.vue";
+import AddProduct from "@/components/Products/ProductAdd.vue";
 import ProductDetail from "@/components/Products/ProductDetail.vue";
+
 export const routes = [
   {
-    path: '/',
+    path: '/Customer',
     component: ListCustomer
   },
   {
     path: '/AddCustomer',
-    component: AddCustomer
+    component: CustomerAdd
   },
   {
     path: '/EditCustomer/:id',
@@ -63,9 +63,4 @@ export const routes = [
   },
 ];
 
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
 
