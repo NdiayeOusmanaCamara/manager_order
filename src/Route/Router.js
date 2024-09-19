@@ -14,7 +14,7 @@ import ProductDetail from "@/components/Products/ProductDetail.vue";
 
 export const routes = [
   {
-    path: '/',
+    path: '/customers',
     component: ListCustomer
   },
   {
