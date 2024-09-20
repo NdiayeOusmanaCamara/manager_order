@@ -1,8 +1,8 @@
 <template>
-    <div class="modal fade show" tabindex="-1" style="display: block;">
-        <div class="modal-dialog modal-position">
-            <div class="modal-content">
-              <div class="modal-header">
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
             <h5 class="modal-title" id="detailsOrderModalLabel">Order Details</h5>
             <button @click="closeModal" type="button" class="btn-close" aria-label="Close"></button>
           </div>
@@ -38,10 +38,15 @@
   </script>
   
   <style scoped>
-  /* Pour s'assurer que la modal est visible */
-  .modal {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  </style>
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
   
+}
+.modal-content{
+  margin-top: 200px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+</style>

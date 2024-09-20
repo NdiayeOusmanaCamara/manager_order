@@ -1,8 +1,8 @@
 <template>
-  <div class="modal fade show" tabindex="-1" style="display: block;">
-    <div class="modal-dialog  modal-lg modal-position">
+  <div class="modal" tabindex="-1">
+    <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header">  
           <h5 class="modal-title">Add New Customer</h5>
           <button type="button" class="btn-close" @click="$emit('close')"></button>
         </div>
@@ -48,7 +48,16 @@ const submit = () => {
 };
 </script>
 <style setup>
-.modal-position {
-  margin-top: 100px;
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  
 }
+.modal-content{
+  margin-top: 200px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
 </style>

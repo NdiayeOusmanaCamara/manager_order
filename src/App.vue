@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <!-- Toggle button for mobile view -->
       <button
@@ -58,12 +58,13 @@ body {
 }
 
 .nav-link {
-  color: #38405d;
+  color: #ffffff;
   font-size: large;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: #2348b4;
+  color: #c1d1e9;
 }
 
 .nav-link i {
@@ -71,7 +72,15 @@ body {
   font-size: 24px; /* Adjust icon size */
 }
 
-.carousel-item {
-  height: 40vh;
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler {
+  border-color: #ffffff;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 </style>

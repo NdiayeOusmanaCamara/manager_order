@@ -125,4 +125,16 @@
     router.push('/Orders');
   };
   </script>
+  <style scoped>
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
   
+}
+.modal-content{
+  margin-top: 200px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+</style>

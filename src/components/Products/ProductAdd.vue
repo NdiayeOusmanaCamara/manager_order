@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade show" tabindex="-1" style="display: block;">
+  <div class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -73,28 +73,16 @@
   </script>
   
   <style scoped>
-  .modal-lg {
-    max-width: 800px;
-  }
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
   
-  .modal-position {
-    margin-top: 100px;
-  }
-  
-  .form-control, .form-select {
-    margin-bottom: 10px;
-  }
-  
-  button {
-    min-width: 100px;
-  }
-  
-  .modal-title {
-    font-size: 1.5rem;
-  }
-  
-  .modal-footer {
-    justify-content: flex-end;
-  }
-  </style>
+}
+.modal-content{
+  margin-top: 100px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+</style>
   

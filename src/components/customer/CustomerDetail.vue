@@ -1,6 +1,6 @@
 <template>
-  <div class="modal fade show" tabindex="-1" style="display: block;">
-    <div class="modal-dialog modal-position">
+  <div class="modal" tabindex="-1">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Customer Details</h5>
@@ -30,8 +30,16 @@ const props = defineProps({
   }
 });
 </script>
-<style setup>
-.modal-position {
-  margin-top: 100px;
+<style scoped>
+.modal {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  
+}
+.modal-content{
+  margin-top: 200px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
 }
 </style>
