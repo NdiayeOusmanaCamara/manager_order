@@ -25,9 +25,9 @@
               <input v-model="customer.phone" type="tel" class="form-control" required />
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-warning">Edit Customer</button>
+              <button type="submit" class="btn btn-primary">Save</button>
               <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
-            </div>
+            </div> 
           </form>
         </div>
       </div>

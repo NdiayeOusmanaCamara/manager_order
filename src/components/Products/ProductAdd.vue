@@ -1,8 +1,8 @@
 <template>
-    <div class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5);" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-position">
-        <div class="modal-content">
-          <div class="modal-header">
+  <div class="modal fade show" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
             <h5 class="modal-title">Create New Product</h5>
             <button type="button" class="btn-close" @click="$emit('close')"></button>
           </div>
