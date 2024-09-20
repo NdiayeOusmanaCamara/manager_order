@@ -46,16 +46,15 @@ const props = defineProps({
   order: Object,
 });
 
-const emit = defineEmits(); // Définir les événements émis
-const orderEdit = ref({ ...props.order }); // Cloner l'ordre pour édition
+const emit = defineEmits(); 
+const orderEdit = ref({ ...props.order });
 
-// Sauvegarde l'ordre édité
 const saveOrder = () => {
-  // Emmet l'événement 'save' vers le composant parent avec l'ordre modifié
+ 
   emit('save', orderEdit.value);
 };
 
-// Mettre à jour l'édition si les props changent
+
 watch(() => props.order, (newOrder) => {
   orderEdit.value = { ...newOrder };
 });

@@ -50,8 +50,8 @@
               </div>
   
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Confirm</button>
-                <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
               </div>
             </form>
           </div>
