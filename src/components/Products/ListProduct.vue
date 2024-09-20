@@ -29,8 +29,8 @@
           <td>{{ product.barcode }}</td>
           <td>{{ product.status }}</td>
           <td>
+            <i @click="openDetailModal(product)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>g
             <i @click="openEditModal(product)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="openDetailModal(product)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
             <i @click="deleteProduct(product.id)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
