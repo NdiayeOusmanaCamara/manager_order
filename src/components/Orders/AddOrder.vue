@@ -3,7 +3,7 @@
       <form @submit.prevent="OrderAdd" class="mb-4">
         <div class="d-flex justify-content-end gap-3">
           <button @click="annuler" type="button" class="btn btn-secondary mt-2">OrdersList</button>
-          <button type="submit" class="btn btn-success mt-2">Submit</button>
+          <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </div>
         
         <div class="row mb-3">
@@ -71,7 +71,7 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" @click="addDetail" class="btn btn-success">Add New Detail</button>
+        <button type="button" @click="addDetail" class="btn btn-primary">Add New Detail</button>
       </form>
     </div>
   </template>
