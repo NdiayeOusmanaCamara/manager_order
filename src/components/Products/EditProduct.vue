@@ -1,81 +1,129 @@
 <template>
-    <div class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5);" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Product</h5>
-            <button type="button" class="btn-close" @click="$emit('close')"></button>
-          </div>
-          <div class="modal-body">
-            <form @submit.prevent="submit">
-              <div class="mb-3">
-                <label for="name">Product Name</label>
-                <input v-model="product.name" type="text" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label for="description">Description</label>
-                <textarea v-model="product.description" class="form-control" required></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="price">Price</label>
-                <input v-model="product.price" type="number" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label for="stock">Stock</label>
-                <input v-model="product.stock" type="number" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label for="category">Category</label>
-                <input v-model="product.category" type="text" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label for="barcode">Barcode</label>
-                <input v-model="product.barcode" type="text" class="form-control" required />
-              </div>
-              <div class="mb-3">
-                <label for="status">Status</label>
-                <select v-model="product.status" class="form-select" required>
-                  <option value="" disabled>Select Status</option>
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Save</button>
-                <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+  <div class="container mt-5">
+    <h2>List of Products</h2>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-primary mb-3" @click="showAddModal = true">
+        Add New Product
+      </button>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, defineEmits, watch } from 'vue';
-  
-  const emit = defineEmits();
-  const props = defineProps({
-    product: {
-      type: Object,
-      required: true
-    }
-  });
-  
-  const product = ref({ ...props.product });
-  
-  // Emit the updated product when the form is submitted
-  const submit = () => {
-    emit('edit', { ...product.value });
-  };
-  
-  // Watch for prop changes to update local product variable
-  watch(() => props.product, (newValue) => {
-    product.value = { ...newValue };
-  });
-  </script>
-  
-  <style scoped>
-  
-  </style>
-  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Category</th>
+          <th>Barcode</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(product) in products" :key="product.id">
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.barcode }}</td>
+          <td>{{ product.status }}</td>
+          <td>
+            <i @click="openEditModal(product)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="openDetailModal(product)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="deleteProduct(product.id)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Add Product Modal -->
+    <ProductModal v-if="showAddModal" @close="showAddModal = false" @add="addProduct" />
+    
+    <!-- Edit Product Modal -->
+    <EditProductModal 
+      v-if="showEditModal" 
+      :product="selectedProduct" 
+      @close="closeEditModal" 
+      @edit="editProduct" 
+    />
+    
+    <!-- Product Detail Modal -->
+    <ProductDetail 
+      v-if="showDetailModal" 
+      :product="selectedProduct" 
+      @close="closeDetailModal" 
+    />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import ProductModal from "@/components/Products/ProductAdd.vue";
+import EditProductModal from "@/components/Products/EditProduct.vue";
+import ProductDetail from "@/components/Products/ProductDetail.vue";
+
+const products = ref([]);
+const showAddModal = ref(false);
+const showEditModal = ref(false);
+const showDetailModal = ref(false);
+const selectedProduct = ref(null);
+
+// Load products from localStorage
+const loadProducts = () => {
+  const data = localStorage.getItem('products');
+  products.value = data ? JSON.parse(data) : [];
+};
+
+// Add a new product
+const addProduct = (newProduct) => {
+  const id = Date.now();
+  products.value.push({ ...newProduct, id });
+  localStorage.setItem('products', JSON.stringify(products.value));
+  showAddModal.value = false; // Close the modal after adding
+};
+
+// Delete a product
+const deleteProduct = (id) => {
+  products.value = products.value.filter(p => p.id !== id);
+  localStorage.setItem('products', JSON.stringify(products.value));
+};
+
+// Open Edit Modal
+const openEditModal = (productData) => {
+  selectedProduct.value = { ...productData }; // Copy product data
+  showEditModal.value = true; // Open edit modal
+};
+
+// Open Detail Modal
+const openDetailModal = (productData) => {
+  selectedProduct.value = { ...productData }; // Copy product data
+  showDetailModal.value = true; // Open detail modal
+};
+
+// Close Detail Modal
+const closeDetailModal = () => {
+  showDetailModal.value = false;
+};
+
+// Close Edit Modal
+const closeEditModal = () => {
+  showEditModal.value = false;
+};
+
+// Edit the product
+const editProduct = (updatedProduct) => {
+  const index = products.value.findIndex(p => p.id === updatedProduct.id);
+  if (index !== -1) {
+    products.value[index] = { ...updatedProduct }; // Update the product in the list
+    localStorage.setItem('products', JSON.stringify(products.value)); // Update local storage
+  }
+  closeEditModal();
+};
+
+onMounted(loadProducts);
+</script>
+
+<style scoped>
+/* Add your styles here */
+</style>
