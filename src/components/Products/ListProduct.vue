@@ -37,10 +37,10 @@
       </tbody>
     </table>
 
-    <!-- Add Product Modal -->
+    
     <ProductModal v-if="showAddModal" @close="showAddModal = false" @add="addProduct" />
     
-    <!-- Edit Product Modal -->
+    
     <EditProductModal 
       v-if="showEditModal" 
       :product="selectedProduct" 
