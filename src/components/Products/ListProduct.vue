@@ -110,16 +110,6 @@ const sampleProducts = [
     category: "Home Office",
     barcode: "41454524425262",
     status: "Available"
-  },
-  {
-    id: 5,
-    name: "Coffee Maker",
-    description: "12-cup programmable coffee maker",
-    price: 59.99,
-    stock: 30,
-    category: "Appliances",
-    barcode: "3132333435363",
-    status: "Available"
   }
 ];
 
