@@ -38,6 +38,7 @@
     </table>
 
     
+    
     <ProductModal v-if="showAddModal" @close="showAddModal = false" @add="addProduct" />
     
     
@@ -108,7 +109,7 @@ const sampleProducts = [
     price: 49.99,
     stock: 75,
     category: "Home Office",
-    barcode: "41454524425262",
+    barcode: "2122232425262",
     status: "Available"
   },
   {
