@@ -108,7 +108,7 @@ const sampleProducts = [
     price: 49.99,
     stock: 75,
     category: "Home Office",
-    barcode: "2122232425262",
+    barcode: "41454524425262",
     status: "Available"
   },
   {
