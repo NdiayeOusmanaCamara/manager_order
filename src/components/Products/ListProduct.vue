@@ -37,10 +37,7 @@
       </tbody>
     </table>
 
-    
-    
     <ProductModal v-if="showAddModal" @close="showAddModal = false" @add="addProduct" />
-    
     
     <EditProductModal 
       v-if="showEditModal" 
@@ -145,8 +142,13 @@ const addProduct = (newProduct) => {
 
 // Delete a product
 const deleteProduct = (id) => {
-  products.value = products.value.filter(p => p.id !== id);
-  localStorage.setItem('products', JSON.stringify(products.value));
+  const productToDelete = products.value.find(p => p.id === id);
+  const confirmation = window.confirm(`Are you sure you want to delete the product "${productToDelete.name}"?`);
+
+  if (confirmation) {
+    products.value = products.value.filter(p => p.id !== id);
+    localStorage.setItem('products', JSON.stringify(products.value));
+  }
 };
 
 // Open Edit Modal

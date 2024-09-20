@@ -115,9 +115,12 @@ const editOrder = (orderModifie) => {
 };
 
 const deleteOrder = (index) => {
-  orders.value.splice(index, 1);
-  localStorage.setItem('orders', JSON.stringify(orders.value));
-  orderSelectionne.value = null;
+  const confirmation = confirm('Are you sure you want to delete this order?');
+  if (confirmation) {
+    orders.value.splice(index, 1);
+    localStorage.setItem('orders', JSON.stringify(orders.value));
+    orderSelectionne.value = null;
+  }
 };
 
 const naviguerOrderAdd = () => {

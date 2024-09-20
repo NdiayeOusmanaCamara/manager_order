@@ -2,10 +2,10 @@
   <div class="container mt-5">
     <h2>List of Customers</h2>
     <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-primary mb-3" @click="showAddModal = true">
-      Add New Customer
-    </button>
-  </div>
+      <button type="button" class="btn btn-primary mb-3" @click="showAddModal = true">
+        Add New Customer
+      </button>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -25,12 +25,13 @@
           <td>
             <i @click="viewDetails(customer)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
             <i @click="openEditModal(customer)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="deleteCustomer(customer.id)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
+            <i @click="confirmDelete(customer.id)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
       </tbody>
     </table>
 
+    <!-- Modals -->
     <CustomerModal v-if="showAddModal" @close="showAddModal = false" @add="addCustomer" />
     <EditCustomerModal 
       v-if="showEditModal" 
@@ -45,12 +46,14 @@
     />
   </div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import CustomerModal from "@customer/AddCustomer.vue";
 import EditCustomerModal from "@customer/EditCustomer.vue";
 import CustomerDetailsModal from "@customer/CustomerDetail.vue";
 
+// State management
 const customers = ref([]);
 const showAddModal = ref(false);
 const showEditModal = ref(false);
@@ -58,6 +61,7 @@ const showDetailsModal = ref(false);
 const selectedCustomer = ref(null);
 const customer = ref({ name: '', address: '', email: '', phone: '' });
 
+// Function to generate fake data
 const generateFakeData = () => {
   return [
     { id: 1, name: 'John', address: '123 Main St, New York', email: 'john.doe@example.com', phone: '555-1234' },
@@ -67,35 +71,50 @@ const generateFakeData = () => {
   ];
 };
 
+// Load customers from localStorage or generate data
 const loadCustomers = () => {
   const data = localStorage.getItem('customers');
   if (data) {
     customers.value = JSON.parse(data);
   } else {
-    customers.value = generateFakeData(); // Ajoute des données factices si aucune donnée n'est trouvée
+    customers.value = generateFakeData();
     localStorage.setItem('customers', JSON.stringify(customers.value));
   }
 };
 
+// Delete customer with confirmation
+const confirmDelete = (id) => {
+  const customer = customers.value.find(c => c.id === id);
+  const confirmation = window.confirm(`Are you sure you want to delete ${customer.name}?`);
+  if (confirmation) {
+    deleteCustomer(id);
+  }
+};
+
+// Delete customer
 const deleteCustomer = (id) => {
   customers.value = customers.value.filter(customer => customer.id !== id);
   localStorage.setItem('customers', JSON.stringify(customers.value));
 };
 
+// View customer details
 const viewDetails = (customerData) => {
   selectedCustomer.value = customerData;
   showDetailsModal.value = true;
 };
 
+// Open edit modal
 const openEditModal = (customerData) => {
   customer.value = { ...customerData };
   showEditModal.value = true;
 };
 
+// Close edit modal
 const closeEditModal = () => {
   showEditModal.value = false;
 };
 
+// Edit customer
 const editCustomer = () => {
   const index = customers.value.findIndex(c => c.id === customer.value.id);
   if (index !== -1) {
@@ -105,6 +124,7 @@ const editCustomer = () => {
   closeEditModal();
 };
 
+// Add new customer
 const addCustomer = (newCustomer) => {
   if (!newCustomer.name || !newCustomer.address || !newCustomer.email || !newCustomer.phone) {
     alert('Please fill in all fields');
@@ -116,5 +136,6 @@ const addCustomer = (newCustomer) => {
   localStorage.setItem('customers', JSON.stringify(customers.value));
 };
 
+// Load customers on component mount
 onMounted(loadCustomers);
 </script>
