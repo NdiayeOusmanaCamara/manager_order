@@ -35,7 +35,7 @@
           </tr>
         </tbody>
       </table>
-      <button @click="backToOrders" class="btn btn-secondary mt-3">Back to Orders</button>
+      <button @click="backToOrders" class="btn btn-secondary mt-3">Orders List</button>
     </div>
     <div v-else>
       <p>Order not found.</p>
