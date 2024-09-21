@@ -1,52 +1,67 @@
 <template>
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="detailsOrderModalLabel">Order Details</h5>
-            <button @click="closeModal" type="button" class="btn-close" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="modal-body">
-                <p><strong>Date:</strong> {{ order.date }}</p>
-                <p><strong>Customer:</strong> {{ order.customer  }}</p>
-                <p><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
-                <p><strong>Track Number:</strong> {{ order.track_number  }}</p>
-                <p><strong>Track Number:</strong> {{ order.track_number  }}</p>
-                <p><strong>Status:</strong> {{ order.status  }}</p>
-              </div>
-            </div>
-          <div class="modal-footer">
-            <button @click="closeModal" type="button" class="btn btn-secondary">Close</button>
-          </div>
-        </div>
+  <div class="container mt-5">
+    <h2>Order Details</h2>
+    <div v-if="order">
+      <div class="mb-3">
+        <strong>Date:</strong> {{ order.date }}
       </div>
+      <div class="mb-3">
+        <strong>Customer:</strong> {{ order.customer }}
+      </div>
+      <div class="mb-3">
+        <strong>Delivery Address:</strong> {{ order.delivery_address }}
+      </div>
+      <div class="mb-3">
+        <strong>Track Number:</strong> {{ order.track_number }}
+      </div>
+      <div class="mb-3">
+        <strong>Status:</strong> {{ order.status }}
+      </div>
+      <h4>Order Details</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(detail, index) in order.details" :key="index">
+            <td>{{ detail.product }}</td>
+            <td>{{ detail.quantity }}</td>
+            <td>{{ detail.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button @click="backToOrders" class="btn btn-secondary mt-3">Back to Orders</button>
     </div>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
-    order: Object
-  });
-  
-  const emit = defineEmits(['close']);
-  
-  // Fermer la modal
-  const closeModal = () => {
-    emit('close');
-  };
-  </script>
-  
-  <style scoped>
-.modal {
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  
-}
-.modal-content{
-  margin-top: 200px;
-  width: 500px;
-  display: flex;
-  justify-content: center;
-}
+    <div v-else>
+      <p>Order not found.</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const order = ref(null);
+const router = useRouter();
+const route = useRoute();
+
+const loadOrder = () => {
+  const index = route.params.id;
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  order.value = orders[index] || null;
+};
+
+const backToOrders = () => {
+  router.push('/Orders');
+};
+
+onMounted(loadOrder);
+</script>
+
+<style scoped>
 </style>

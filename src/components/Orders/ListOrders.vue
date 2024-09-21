@@ -2,11 +2,9 @@
   <div class="container mt-5">
     <h2>List of Orders</h2>
     <div class="d-flex justify-content-end">
-      <button @click="naviguerOrderAdd" class="btn btn-primary mb-3">
-        Add New Order
-      </button>
+      <button @click="naviguerOrderAdd" class="btn btn-primary mb-3">Add New Order</button>
     </div>
-    
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -26,106 +24,56 @@
           <td>{{ order.track_number }}</td>
           <td>{{ order.status }}</td>
           <td>
-            <i @click="voirDetails(order)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
-            <i @click="ouvrirModal(order, index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="voirDetails(index)" class="fas fa-eye text-info" style="cursor: pointer; margin-right: 8px;"></i>
+            <i @click="editOrder(index)" class="fas fa-edit text-warning" style="cursor: pointer; margin-right: 8px;"></i>
             <i @click="deleteOrder(index)" class="fas fa-trash text-danger" style="cursor: pointer;"></i>
           </td>
         </tr>
       </tbody>
     </table>
-
-    <OrderDetail v-if="modalOpen" :order="orderSelectionne" @close="modalOpen = false" />
-
-    <EditOrderModal v-if="editModalOpen" :order="orderSelectionne" @save="editOrder" @close="editModalOpen = false" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import OrderDetail from '@/components/Orders/OrderDetail.vue';
-import EditOrderModal from '@/components/Orders/EditOrder.vue';
 
 const orders = ref([]);
-const orderSelectionne = ref(null);
-const modalOpen = ref(false);
-const editModalOpen = ref(false);
-const orderEditIndex = ref(null);
 const router = useRouter();
 
-// Fonction pour générer des données factices
-const generateFakeOrders = () => {
-  return [
-    {
-      date: '2024-09-01',
-      customer: 'John Doe',
-      delivery_address: '123 Main St, New York, NY',
-      track_number: 'TRK12345',
-      status: 'Shipped',
-    },
-    {
-      date: '2024-09-03',
-      customer: 'Jane Smith',
-      delivery_address: '456 Oak St, Los Angeles, CA',
-      track_number: 'TRK67890',
-      status: 'Delivered',
-    },
-    {
-      date: '2024-09-05',
-      customer: 'Alice Johnson',
-      delivery_address: '789 Pine St, Chicago, IL',
-      track_number: 'TRK13579',
-      status: 'Processing',
-    },
-    {
-      date: '2024-09-07',
-      customer: 'Bob Brown',
-      delivery_address: '321 Cedar St, Houston, TX',
-      track_number: 'TRK24680',
-      status: 'Cancelled',
-    },
-  ];
-};
-
+// Load orders from localStorage
 const chargerOrders = () => {
   const data = localStorage.getItem('orders');
-  if (data) {
-    orders.value = JSON.parse(data);
-  } else {
-    orders.value = generateFakeOrders(); // Utilise les données factices si localStorage est vide
-    localStorage.setItem('orders', JSON.stringify(orders.value));
-  }
+  orders.value = data ? JSON.parse(data) : [];
 };
 
-const voirDetails = (order) => {
-  orderSelectionne.value = order;
-  modalOpen.value = true;
-};
-
-const ouvrirModal = (order, index) => {
-  orderSelectionne.value = { ...order };
-  orderEditIndex.value = index;
-  editModalOpen.value = true;
-};
-
-const editOrder = (orderModifie) => {
-  orders.value[orderEditIndex.value] = orderModifie;
-  localStorage.setItem('orders', JSON.stringify(orders.value));
-  editModalOpen.value = false;
-};
-
+// Delete an order
 const deleteOrder = (index) => {
   const confirmation = confirm('Are you sure you want to delete this order?');
   if (confirmation) {
     orders.value.splice(index, 1);
     localStorage.setItem('orders', JSON.stringify(orders.value));
-    orderSelectionne.value = null;
   }
 };
 
+// Navigate to AddOrder component
 const naviguerOrderAdd = () => {
   router.push('/AddOrder');
 };
 
+// Navigate to EditOrder component
+const editOrder = (index) => {
+  router.push({ path: `/EditOrder/${index}` });
+};
+
+// View order details (if you have a separate detail page)
+const voirDetails = (index) => {
+  router.push({ path: `/OrderDetail/${index}` });
+};
+
+// On component mount, load the orders
 onMounted(chargerOrders);
 </script>
+
+<style scoped>
+</style>
