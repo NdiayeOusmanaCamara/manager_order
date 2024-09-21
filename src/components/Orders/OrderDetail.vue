@@ -17,24 +17,18 @@
       <div class="mb-3">
         <strong>Status:</strong> {{ order.status }}
       </div>
+      <div v-for="(detail, index) in order.details" :key="index">
+        <div class="mb-3">
+          <strong>Product:</strong> {{ detail.product }}
+        </div> 
+        <div class="mb-3">
+          <strong>Quantity:</strong> {{ detail.quantity}}
+        </div> 
+        <div class="mb-3">
+          <strong>Price:</strong> {{ detail.price }}
+        </div> 
+      </div>
       
-      
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(detail, index) in order.details" :key="index">
-            <td>{{ detail.product }}</td>
-            <td>{{ detail.quantity }}</td>
-            <td>{{ detail.price }}</td>
-          </tr>
-        </tbody>
-      </table>
       <button @click="backToOrders" class="btn btn-secondary mt-3">Orders List</button>
     </div>
     <div v-else>
