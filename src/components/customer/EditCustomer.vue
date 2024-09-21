@@ -36,8 +36,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, defineEmits, defineProps, watch } from 'vue';
 
+const emit = defineEmits();
 const props = defineProps({
   customer: {
     type: Object,
@@ -45,11 +46,17 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits();
+const customer = ref({ ...props.customer });
+
 
 const submit = () => {
-  emit('edit', { ...props.customer }); // Utilisez props.customer pour accéder à l'objet client
+  emit('edit', { ...customer.value });
 };
+
+
+watch(() => props.customer, (newValue) => {
+  customer.value = { ...newValue };
+});
 </script>
 <style scoped>
 .modal {
