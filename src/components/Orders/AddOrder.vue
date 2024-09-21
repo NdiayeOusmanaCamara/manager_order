@@ -107,7 +107,6 @@ const removeDetail = (index) => {
   orderDetails.value.splice(index, 1);
 };
 
-
 const OrderAdd = () => {
   if (!newOrder.value.date || !newOrder.value.customer || !newOrder.value.delivery_address || !newOrder.value.track_number || !newOrder.value.status) {
     alert('Please fill in all fields');
@@ -125,11 +124,16 @@ const OrderAdd = () => {
   newOrder.value = { date: '', customer: '', delivery_address: '', track_number: '', status: '' };
   orderDetails.value = [{ product: '', quantity: 1, price: 0 }];
   
-  // Redirect to the orders list page
+  // Redirect to the orders list page after submitting
   router.push('/Orders');
 };
 
+// Method for navigating to Orders list page when "Orders List" button is clicked
+const annuler = () => {
+  router.push('/Orders');
+};
 </script>
 
 <style scoped>
+/* Add custom styles here if needed */
 </style>

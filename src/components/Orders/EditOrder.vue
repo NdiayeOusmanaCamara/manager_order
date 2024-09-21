@@ -55,7 +55,6 @@
         <tr v-for="(detail, index) in order.details" :key="index">
           <td>
             <select v-model="detail.product" class="form-select">
-              <option value="" disabled>Select Product</option>
               <option value="1">Product 1</option>
               <option value="2">Product 2</option>
             </select>
