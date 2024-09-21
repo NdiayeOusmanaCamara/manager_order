@@ -17,7 +17,8 @@
       <div class="mb-3">
         <strong>Status:</strong> {{ order.status }}
       </div>
-      <h4>Order Details</h4>
+      
+      
       <table class="table table-bordered">
         <thead>
           <tr>

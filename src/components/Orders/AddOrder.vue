@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <h2>Add New Order</h2>
     <form @submit.prevent="OrderAdd" class="mb-4">
       <div class="d-flex justify-content-end gap-3">
         <button @click="annuler" type="button" class="btn btn-secondary mt-2">Orders List</button>
@@ -115,15 +116,14 @@ const OrderAdd = () => {
   });
   localStorage.setItem('orders', JSON.stringify(orders));
   
+  // Reset the form
   newOrder.value = { date: '', customer: '', delivery_address: '', track_number: '', status: '' };
   orderDetails.value = [{ product: '', quantity: 1, price: 0 }];
   
+  // Redirect to the orders list page
   router.push('/Orders');
 };
 
-const annuler = () => {
-  router.push('/Orders');
-};
 </script>
 
 <style scoped>
