@@ -6,35 +6,14 @@
             <h5 class="modal-title">Product Details</h5>
             <button type="button" class="btn-close" @click="$emit('close')"></button>
           </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <strong>Product Name:</strong>
-              <p>{{ product.name }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Description:</strong>
-              <p>{{ product.description }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Price:</strong>
-              <p>{{ product.price }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Stock:</strong>
-              <p>{{ product.stock }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Category:</strong>
-              <p>{{ product.category }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Barcode:</strong>
-              <p>{{ product.barcode }}</p>
-            </div>
-            <div class="mb-3">
-              <strong>Status:</strong>
-              <p>{{ product.status }}</p>
-            </div>
+          <div class="modal-body">        
+              <p><strong>Product Name:</strong> {{ product.name }}</p>
+              <p><strong>Description:</strong> {{ product.description }}</p>
+              <p><strong>Price:</strong> {{ product.price }}</p>
+              <p><strong>Stock:</strong> {{ product.stock }}</p>
+              <p><strong>Category:</strong> {{ product.category }}</p>
+              <p><strong>Barcode:</strong> {{ product.barcode }}</p>
+              <p><strong>Status:</strong> {{ product.status }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
