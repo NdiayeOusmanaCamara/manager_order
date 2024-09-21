@@ -65,7 +65,7 @@ const customer = ref({ name: '', address: '', email: '', phone: '' });
 const generateFakeData = () => {
   return [
     { id: 1, name: 'John', address: '123 Main St, New York', email: 'john.doe@example.com', phone: '555-1234' },
-    { id: 2, name: 'Jane Smith', address: '456 Elm St, San Francisco', email: 'jane.smith@example.com', phone: '555-5678' },
+    { id: 2, name: 'Jane Smith', address: '456 Elm St, jack', email: 'jane.smith@example.com', phone: '555-5678' },
     { id: 3, name: 'Alice Johnson', address: '789 Oak St, Chicago', email: 'alice.johnson@example.com', phone: '555-9876' },
     { id: 4, name: 'Bob Brown', address: '321 Maple St, Los Angeles', email: 'bob.brown@example.com', phone: '555-4321' },
   ];
