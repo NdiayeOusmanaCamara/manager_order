@@ -36,8 +36,9 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-success">Update Order</button>
+      <div class="d-flex justify-content-end gap-3">
+        <button @click="cancelEdit" type="button" class="btn btn-secondary mt-2">Orders List</button>
+        <button type="submit" class="btn btn-success mt-2">Update Order</button>
       </div>
     </form>
 
@@ -87,34 +88,45 @@ const order = ref({
 
 const orderId = ref(null);
 
+// Load order data from localStorage when component is mounted
 const loadOrder = () => {
   const orders = JSON.parse(localStorage.getItem('orders')) || [];
   const foundOrder = orders[orderId.value];
   if (foundOrder) {
-    order.value = foundOrder;
+    order.value = foundOrder;  // Load the found order into the order object
   }
 };
 
+// Add a new detail row to the order details
 const addDetail = () => {
   order.value.details.push({ product: '', quantity: 1, price: 0 });
 };
 
+// Remove a detail from the order details list
 const removeDetail = (index) => {
   order.value.details.splice(index, 1);
 };
 
+// Update the order in localStorage and navigate to the Orders list
 const updateOrder = () => {
   const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  orders[orderId.value] = order.value; // Update the order with the new values
+  orders[orderId.value] = order.value;  // Update the specific order
   localStorage.setItem('orders', JSON.stringify(orders));
-  router.push('/Orders'); // Redirect to the list of orders
+  router.push('/Orders');  // Redirect to orders list
 };
 
+// Cancel editing and return to the orders list page
+const cancelEdit = () => {
+  router.push('/Orders');
+};
+
+// Load the order data when the component is mounted
 onMounted(() => {
-  orderId.value = parseInt(router.currentRoute.value.params.id);
+  orderId.value = parseInt(router.currentRoute.value.params.id);  // Get the order ID from route params
   loadOrder();
 });
 </script>
 
 <style scoped>
+/* Add any custom styles here if needed */
 </style>
