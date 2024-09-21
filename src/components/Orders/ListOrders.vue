@@ -47,15 +47,18 @@ const chargerOrders = () => {
   orders.value = data ? JSON.parse(data) : [];
 };
 
-// Delete an order
 const deleteOrder = (index) => {
+  if (orders.value.length <= 1) {
+    alert("You cannot delete the last remaining order.");
+    return;
+  }
+
   const confirmation = confirm('Are you sure you want to delete this order?');
   if (confirmation) {
     orders.value.splice(index, 1);
     localStorage.setItem('orders', JSON.stringify(orders.value));
   }
 };
-
 // Navigate to AddOrder component
 const naviguerOrderAdd = () => {
   router.push('/AddOrder');

@@ -100,8 +100,13 @@ const addDetail = () => {
 };
 
 const removeDetail = (index) => {
+  if (orderDetails.value.length <= 1) {
+    alert("At least one order detail is required.");
+    return;
+  }
   orderDetails.value.splice(index, 1);
 };
+
 
 const OrderAdd = () => {
   if (!newOrder.value.date || !newOrder.value.customer || !newOrder.value.delivery_address || !newOrder.value.track_number || !newOrder.value.status) {
