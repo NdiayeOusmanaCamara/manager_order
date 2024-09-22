@@ -30,11 +30,11 @@ export const routes = [
     component: CustomerDetail
   },
   { 
-    path: "/Orders", 
+    path: "/orders", 
     component: ListOrders 
   },
   { 
-    path: "/AddOrder", 
+    path: "/orders/create", 
     component: AddOrder 
   },
   { 
@@ -46,7 +46,7 @@ export const routes = [
     component: OrderDetail
   },
   { 
-    path: "/Products", 
+    path: "/products", 
     component: ListProduct 
   },
   {

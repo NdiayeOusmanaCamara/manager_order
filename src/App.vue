@@ -23,12 +23,12 @@
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/Products">
+            <RouterLink class="nav-link" to="/products">
               <i class="bi bi-box-seam"></i> Products
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/Orders">
+            <RouterLink class="nav-link" to="/orders">
               <i class="bi bi-cart"></i> Orders
             </RouterLink>
           </li>

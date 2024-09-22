@@ -61,7 +61,7 @@ const deleteOrder = (index) => {
 };
 // Navigate to AddOrder component
 const naviguerOrderAdd = () => {
-  router.push('/AddOrder');
+  router.push('/orders/create');
 };
 
 // Navigate to EditOrder component
