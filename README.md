@@ -62,4 +62,4 @@ L'application utilise les technologies suivantes :
    
    **Author**
    
-   [N'Diaye Ousmane Camara](https://github.com/NdiayeOusmanaCamara/manager_order.git)
+  [ N'Diaye Ousmane Camara](https://github.com/NdiayeOusmanaCamara)
