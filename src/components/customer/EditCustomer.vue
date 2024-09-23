@@ -24,7 +24,7 @@
               <label for="phone" class="form-label">Phone</label>
               <input v-model="customer.phone" type="tel" id="phone" class="form-control" required />
             </div>
-            <div class="modal-footer d-flex justify-content-endgir">
+            <div class="modal-footer d-flex justify-content-end">
               <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
               <button type="submit" class="btn btn-primary">Confirm</button>
             </div>
