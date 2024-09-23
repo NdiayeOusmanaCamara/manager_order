@@ -3,7 +3,7 @@ import ListCustomers from '@customer/ListCustomers.vue';
 import CustomerAdd from "@customer/AddCustomer.vue";
 import EditCustomer from "@customer/EditCustomer.vue";
 import CustomerDetail from "@customer/CustomerDetail.vue";
-import ListOrders from "@/components/Orders/ListOrders.vue";
+import ListOrder from "@/components/Orders/ListOrder.vue";
 import EditOrder from "@/components/Orders/EditOrder.vue";
 import AddOrder from "@/components/Orders/AddOrder.vue";
 import OrderDetail from "@/components/Orders/OrderDetail.vue";
@@ -29,22 +29,26 @@ export const routes = [
     path: '/CustomerDetail/:id',
     component: CustomerDetail
   },
-  { 
-    path: "/orders", 
-    component: ListOrders 
-  },
-  { 
-    path: "/orders/create", 
-    component: AddOrder 
-  },
-  { 
-    path: "/EditOrder/:id", 
-    component: EditOrder 
+  {
+    path: '/orders',
+    name: 'order-list',      
+    component: ListOrder,
   },
   {
-    path: '/OrderDetail/:id',
-    component: OrderDetail
-  },
+   path: '/add-order',  
+   name: 'order-add',
+   component: AddOrder,
+ },
+ {
+   path: '/order-edit/:id',
+   name: 'order-edit',
+   component: EditOrder,
+ },
+ {
+   path: '/order-view/:id',
+   name: 'order-view',
+   component: OrderDetail,
+ },
   { 
     path: "/products", 
     component: ListProduct 

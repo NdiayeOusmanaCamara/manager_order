@@ -1,139 +1,122 @@
 <template>
-  <div class="container mt-5">
-    <h2>Add New Order</h2>
-    <form @submit.prevent="OrderAdd" class="mb-4">
-      <div class="d-flex justify-content-end gap-3">
-        <button @click="annuler" type="button" class="btn btn-secondary mt-2">Orders List</button>
-        <button type="submit" class="btn btn-success mt-2">Submit</button>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="date" class="form-label">Date</label>
-          <input type="date" v-model="newOrder.date" class="form-control" id="date" placeholder="jj/mm/aaaa">
-        </div>
-        <div class="col-md-6">
-          <label for="address" class="form-label">Delivery Address</label>
-          <input type="text" v-model="newOrder.delivery_address" class="form-control" id="address" placeholder="Enter delivery address">
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="customerName" class="form-label">Customer Name</label>
-          <input type="text" v-model="newOrder.customer" class="form-control" id="customerName" placeholder="Enter customer name">
-        </div>
-        <div class="col-md-6">
-          <label for="trackNumber" class="form-label">Track Number</label>
-          <input type="text" v-model="newOrder.track_number" class="form-control" id="trackNumber" placeholder="Enter track number">
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="orderStatus" class="form-label">Order Status</label>
-          <select v-model="newOrder.status" class="form-select" id="orderStatus">
-            <option value="processing">Processing</option>
-            <option value="shipped">Shipped</option>
-            <option value="delivered">Delivered</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-        </div>
-      </div>
-    </form>
-
-    <div class="container mt-5">
-      <h3>Order Details</h3>
-      <form>
+    <div class="container">
+        <h2 class="mb-4 mt-4">Add Orders</h2>
+        <form class="row g-3">
+          <div class="btn-right-action mt-4 mb-4 d-flex justify-content-end">
+            <RouterLink
+              type="button"
+              class="btn btn-secondary mx-4"
+              :to="{ name: 'order-list' }"
+            >
+            Orders List
+            </RouterLink>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="col-md-6">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" />
+          </div>
+          <div class="col-md-6">
+            <label for="address" class="form-label">Delivery Address</label>
+            <input type="text" class="form-control" id="address" />
+          </div>
+          <div class="col-md-6">
+            <label for="name" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="name" />
+          </div>
+          <div class="col-md-6">
+            <label for="trackNumer" class="form-label">Track Number</label>
+            <input type="text" class="form-control" id="trackNumer" />
+          </div>
+          <div class="col-md-6 offset-6">
+            <label for="status" class="form-label">Order Status</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected></option>
+              <option value="1">Processing</option>
+              <option value="2">Shipped</option>
+              <option value="3">Delivered</option>
+            </select>
+          </div>
+        </form>
+      <!-- </div class> -->
+      <RouterView />
+  
+      <div class="row mt-5 mx-1">
+        <h2 class="mx-0">Order Details</h2>
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Actions</th>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(detail, index) in orderDetails" :key="index">
+            <tr v-for="(detail, index) in orderDetail" :key="index">
               <td>
-                <select v-model="detail.product" class="form-select">
-                  <option value="" disabled>Select Product</option>
-                  <option value="1">Product 1</option>
-                  <option value="2">Product 2</option>
+                <select
+                  class="form-select"
+                  v-model="product"
+                  aria-label="Default select example"
+                >
+                  <option selected>{{ detail.product }}</option>
+                  <option value="1">Processing</option>
+                  <option value="2">Shipped</option>
+                  <option value="3">Delivered</option>
                 </select>
               </td>
-              <td><input type="number" v-model="detail.quantity" class="form-control" min="1"></td>
-              <td><input type="number" v-model="detail.price" class="form-control" min="0"></td>
               <td>
-                <button type="button" @click="removeDetail(index)" class="btn btn-danger">Remove</button>
+                <input type="number" class="form-control" v-model="quantity" />
+              </td>
+              <td>
+                <input type="number" class="form-control" v-model="price" />
+              </td>
+              <td>
+                <button @click="removeDetail(index)" class="btn btn-danger">
+                  Remove
+                </button>
+              </td>
+            </tr>
+  
+            <tr>
+              <td colspan="4">
+                <button @click="addDetail" class="btn btn-success">
+                  Add New Detail
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <button type="button" @click="addDetail" class="btn btn-success">Add New Detail</button>
-      </form>
+      </div>
     </div>
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const newOrder = ref({
-  date: '',
-  customer: '',
-  delivery_address: '',
-  track_number: '',
-  status: ''
-});
-
-const orderDetails = ref([
-  { product: '', quantity: 1, price: 0 }
-]);
-
-const addDetail = () => {
-  orderDetails.value.push({ product: '', quantity: 1, price: 0 });
-};
-
-const removeDetail = (index) => {
-  if (orderDetails.value.length <= 1) {
-    alert("At least one order detail is required.");
-    return;
-  }
-  orderDetails.value.splice(index, 1);
-};
-
-const OrderAdd = () => {
-  if (!newOrder.value.date || !newOrder.value.customer || !newOrder.value.delivery_address || !newOrder.value.track_number || !newOrder.value.status) {
-    alert('Please fill in all fields');
-    return;
-  }
-
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  orders.push({
-    ...newOrder.value,
-    details: orderDetails.value 
-  });
-  localStorage.setItem('orders', JSON.stringify(orders));
+  </template>
   
-  // Reset the form
-  newOrder.value = { date: '', customer: '', delivery_address: '', track_number: '', status: '' };
-  orderDetails.value = [{ product: '', quantity: 1, price: 0 }];
+  <script setup>
+  import { RouterLink, RouterView } from "vue-router";
+  import { ref } from "vue";
+  const product = ref("");
+  const quantity = ref(1);
+  const price = ref(0);
   
-  // Redirect to the orders list page after submitting
-  router.push('/Orders');
-};
-
-// Method for navigating to Orders list page when "Orders List" button is clicked
-const annuler = () => {
-  router.push('/Orders');
-};
-</script>
-
-<style scoped>
-/* Add custom styles here if needed */
-</style>
+  const orderDetail = ref([{ product: "Product 1", quantity: 2, price: 25.0 }]);
+  
+  function addDetail() {
+    orderDetail.value.push({
+      product: product.value,
+      quantity: quantity.value,
+      price: price.value,
+    });
+  }
+  
+  function removeDetail(index) {
+    if (orderDetail.value.length > 1) {
+      orderDetail.value.splice(index, 1);
+    } else {
+      alert("You cannot delete the last remaining detail.");
+    }
+  }
+  </script>
+  
+  <style scoped></style>
+  
