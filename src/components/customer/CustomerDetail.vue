@@ -63,6 +63,8 @@ const props = defineProps({
 
 .modal-content {
   padding: 20px;
+  margin-top: 200px;
+  width: 500px;
 }
 
 .modal-body {

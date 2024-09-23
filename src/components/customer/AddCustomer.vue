@@ -57,9 +57,9 @@ const submit = () => {
 .form-group label{
 padding-bottom: 5px
 }
-.modal-content{
+.modal-content {
   margin-top: 150px;
-  width: 500px;
+  width: 550px;
   display: flex;
   justify-content: center;
 }

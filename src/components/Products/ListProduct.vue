@@ -46,7 +46,6 @@
       @edit="editProduct" 
     />
     
-    <!-- Product Detail Modal -->
     <ProductDetail 
       v-if="showDetailModal" 
       :product="selectedProduct" 
@@ -121,22 +120,15 @@ const sampleProducts = [
   }
 ];
 
-// Load products from localStorage or set sample data
+// Load products by setting sample data initially
 const loadProducts = () => {
-  const data = localStorage.getItem('products');
-  if (!data) {
-    localStorage.setItem('products', JSON.stringify(sampleProducts)); // Save sample data if no data exists
-    products.value = sampleProducts;
-  } else {
-    products.value = JSON.parse(data); // Load existing products
-  }
+  products.value = sampleProducts;
 };
 
 // Add a new product
 const addProduct = (newProduct) => {
   const id = Date.now();
   products.value.push({ ...newProduct, id });
-  localStorage.setItem('products', JSON.stringify(products.value));
   showAddModal.value = false; // Close the modal after adding
 };
 
@@ -147,38 +139,36 @@ const deleteProduct = (id) => {
 
   if (confirmation) {
     products.value = products.value.filter(p => p.id !== id);
-    localStorage.setItem('products', JSON.stringify(products.value));
   }
 };
 
-// Open Edit Modal
+
 const openEditModal = (productData) => {
-  selectedProduct.value = { ...productData }; // Copy product data
-  showEditModal.value = true; // Open edit modal
+  selectedProduct.value = { ...productData }; 
+  showEditModal.value = true; 
 };
 
-// Open Detail Modal
+
 const openDetailModal = (productData) => {
-  selectedProduct.value = { ...productData }; // Copy product data
-  showDetailModal.value = true; // Open detail modal
+  selectedProduct.value = { ...productData }; 
+  showDetailModal.value = true;
 };
 
-// Close Detail Modal
+
 const closeDetailModal = () => {
   showDetailModal.value = false;
 };
 
-// Close Edit Modal
+
 const closeEditModal = () => {
   showEditModal.value = false;
 };
 
-// Edit the product
+
 const editProduct = (updatedProduct) => {
   const index = products.value.findIndex(p => p.id === updatedProduct.id);
   if (index !== -1) {
     products.value[index] = { ...updatedProduct }; 
-    localStorage.setItem('products', JSON.stringify(products.value)); 
   }
   closeEditModal();
 };
@@ -187,4 +177,25 @@ onMounted(loadProducts);
 </script>
 
 <style scoped>
+.modal.show {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  margin-top: 100px;
+  width: 600px;
+}
+
+.form-control {
+  background-color: #f1f3f5;
+  border: none;
+}
+
+textarea.form-control {
+  resize: none;
+}
+.row{
+  font-weight: 100;
+}
 </style>

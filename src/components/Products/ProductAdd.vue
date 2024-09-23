@@ -78,11 +78,14 @@
   background-color: rgba(0, 0, 0, 0.5);
   
 }
-.modal-content{
-  margin-top: 100px;
-  width: 500px;
+.modal-content {
+  margin-top: 150px;
+  width: 650px;
   display: flex;
   justify-content: center;
+}
+.form-control{
+  font-weight: 100;
 }
 </style>
   

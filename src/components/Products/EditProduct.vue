@@ -1,6 +1,6 @@
 <template>
-  <div class="modal fade show d-flex justify-content-center align-items-center" tabindex="-1" style="display: block;">
-    <div class="modal-dialog">
+  <div class="modal show" tabindex="-1">
+    <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Product</h5>
@@ -11,7 +11,7 @@
             <div class="row mb-3">
               <div class="col">
                 <label for="name">Product Name</label>
-                <input v-model="product.name" type="text" class="form-control" required />
+                <input v-model="product.name" type="text" class="form-control " required />
               </div>
               <div class="col">
                 <label for="status">Status</label>
@@ -51,8 +51,9 @@
             </div>
 
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
+              <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
+              <button type="submit" class="btn btn-primary">Confirm</button>
+              
             </div>
           </form>
         </div>
@@ -86,12 +87,12 @@ watch(() => props.product, (newValue) => {
 </script>
 
 <style scoped>
-.modal {
-  display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+
 .modal-content {
-  margin-top: 100px;
-  width: 500px;
+  margin-top: 150px;
+  width: 650px;
+  display: flex;
+  justify-content: center;
 }
+
 </style>

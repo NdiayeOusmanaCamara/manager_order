@@ -2,6 +2,10 @@
   <div class="container mt-5">
     <h2>Edit Order</h2>
     <form @submit.prevent="updateOrder">
+      <div class="d-flex justify-content-end gap-3">
+        <button @click="cancelEdit" type="button" class="btn btn-secondary mt-2">Orders List</button>
+        <button type="submit" class="btn btn-success mt-2">Update Order</button>
+      </div>
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="date" class="form-label">Date</label>
@@ -36,10 +40,7 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end gap-3">
-        <button @click="cancelEdit" type="button" class="btn btn-secondary mt-2">Orders List</button>
-        <button type="submit" class="btn btn-success mt-2">Update Order</button>
-      </div>
+    
     </form>
 
     <h3 class="mt-4">Order Details</h3>

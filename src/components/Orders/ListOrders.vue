@@ -38,14 +38,39 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-const orders = ref([]);
+
+const orders = ref([
+  {
+    date: "25/07/2024",
+    customer: "John Doe",
+    delivery_address: "123 Main St, New York, NY",
+    track_number: "TN001",
+    status: "Shipped"
+  },
+  {
+    date: "26/07/2024",
+    customer: "Jane Smith",
+    delivery_address: "456 Oak St, Los Angeles, CA",
+    track_number: "TN002",
+    status: "Delivered"
+  },
+  {
+    date: "27/07/2024",
+    customer: "Alice Martin",
+    delivery_address: "789 Pine St, Chicago, IL",
+    track_number: "TN003",
+    status: "Processing"
+  }
+]);
+
 const router = useRouter();
 
-// Load orders from localStorage
-const chargerOrders = () => {
-  const data = localStorage.getItem('orders');
-  orders.value = data ? JSON.parse(data) : [];
-};
+
+// const chargerOrders = () => {
+//   const data = localStorage.getItem('orders');
+//   orders.value = data ? JSON.parse(data) : orders.value;
+// };
+
 
 const deleteOrder = (index) => {
   if (orders.value.length <= 1) {
@@ -59,24 +84,26 @@ const deleteOrder = (index) => {
     localStorage.setItem('orders', JSON.stringify(orders.value));
   }
 };
-// Navigate to AddOrder component
+
+
 const naviguerOrderAdd = () => {
   router.push('/orders/create');
 };
 
-// Navigate to EditOrder component
+
 const editOrder = (index) => {
   router.push({ path: `/EditOrder/${index}` });
 };
 
-// View order details (if you have a separate detail page)
+
 const voirDetails = (index) => {
   router.push({ path: `/OrderDetail/${index}` });
 };
 
-// On component mount, load the orders
-onMounted(chargerOrders);
+
+// onMounted(chargerOrders);
 </script>
 
 <style scoped>
+
 </style>

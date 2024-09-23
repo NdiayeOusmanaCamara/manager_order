@@ -71,22 +71,15 @@ const sampleCustomers = [
     { id: 4, name: 'Bob Brown', address: '321 Maple St, Los Angeles', email: 'bob.brown@example.com', phone: '555-4321' },
 ];
 
-// Load customers from localStorage or initialize with sample data
+// Load customers (using sample data for now)
 const loadCustomers = () => {
-  const data = localStorage.getItem('customers');
-  if (!data) {
-    localStorage.setItem('customers', JSON.stringify(sampleCustomers)); 
-    customers.value = sampleCustomers;
-  } else {
-    customers.value = JSON.parse(data); 
-  }
+  customers.value = sampleCustomers;
 };
 
 // Add a new customer
 const addCustomer = (newCustomer) => {
   const id = Date.now();
   customers.value.push({ ...newCustomer, id });
-  localStorage.setItem('customers', JSON.stringify(customers.value));
   showAddModal.value = false;
 };
 
@@ -97,7 +90,6 @@ const deleteCustomer = (id) => {
 
   if (confirmation) {
     customers.value = customers.value.filter(p => p.id !== id);
-    localStorage.setItem('customers', JSON.stringify(customers.value)); // Use 'customers' key
   }
 };
 
@@ -128,7 +120,6 @@ const editCustomer = (updatedCustomer) => {
   const index = customers.value.findIndex(c => c.id === updatedCustomer.id);
   if (index !== -1) {
     customers.value[index] = { ...updatedCustomer };
-    localStorage.setItem('customers', JSON.stringify(customers.value));
   }
   closeEditModal();
 };

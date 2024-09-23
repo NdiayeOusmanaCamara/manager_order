@@ -67,7 +67,9 @@ watch(() => props.customer, (newValue) => {
   margin-top: 150px;
   width: 500px;
 }
-
+.form-group label{
+  padding-bottom: 5px
+  }
 .modal-footer {
   justify-content: space-between;
 }
