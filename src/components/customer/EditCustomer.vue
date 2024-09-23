@@ -8,26 +8,26 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="submit">
-            <div class="form-group">
-              <label for="name">Customer Name</label>
-              <input v-model="customer.name" type="text" class="form-control" required />
+            <div class="mb-3">
+              <label for="name" class="form-label">Customer Name</label>
+              <input v-model="customer.name" type="text" id="name" class="form-control" required disabled />
             </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input v-model="customer.address" type="text" class="form-control" required />
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea v-model="customer.address" id="address" class="form-control" rows="2" required></textarea>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input v-model="customer.email" type="email" class="form-control" required />
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input v-model="customer.email" type="email" id="email" class="form-control" required />
             </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input v-model="customer.phone" type="tel" class="form-control" required />
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input v-model="customer.phone" type="tel" id="phone" class="form-control" required />
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
-            </div> 
+            <div class="modal-footer d-flex justify-content-endgir">
+              <button type="button" class="btn btn-secondary" @click="$emit('close')">Close</button>
+              <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
           </form>
         </div>
       </div>
@@ -48,26 +48,27 @@ const props = defineProps({
 
 const customer = ref({ ...props.customer });
 
-
 const submit = () => {
   emit('edit', { ...customer.value });
 };
-
 
 watch(() => props.customer, (newValue) => {
   customer.value = { ...newValue };
 });
 </script>
+
 <style scoped>
 .modal {
   display: block;
   background-color: rgba(0, 0, 0, 0.5);
-  
 }
-.modal-content{
-  margin-top: 200px;
+
+.modal-content {
+  margin-top: 150px;
   width: 500px;
-  display: flex;
-  justify-content: center;
+}
+
+.modal-footer {
+  justify-content: space-between;
 }
 </style>
