@@ -20,6 +20,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr v-if="products.length === 0">
+          <td colspan="8" class="text-center">No products available</td>
+        </tr>
         <tr v-for="(product) in products" :key="product.id">
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
@@ -37,8 +40,10 @@
       </tbody>
     </table>
 
+    <!-- Add Product Modal -->
     <ProductModal v-if="showAddModal" @close="showAddModal = false" @add="addProduct" />
     
+    <!-- Edit Product Modal -->
     <EditProductModal 
       v-if="showEditModal" 
       :product="selectedProduct" 
@@ -46,6 +51,7 @@
       @edit="editProduct" 
     />
     
+    <!-- Product Detail Modal -->
     <ProductDetail 
       v-if="showDetailModal" 
       :product="selectedProduct" 
@@ -60,6 +66,7 @@ import ProductModal from "@/components/Products/ProductAdd.vue";
 import EditProductModal from "@/components/Products/EditProduct.vue";
 import ProductDetail from "@/components/Products/ProductDetail.vue";
 
+// State management
 const products = ref([]);
 const showAddModal = ref(false);
 const showEditModal = ref(false);
@@ -142,37 +149,38 @@ const deleteProduct = (id) => {
   }
 };
 
-
+// Open Edit Modal
 const openEditModal = (productData) => {
-  selectedProduct.value = { ...productData }; 
-  showEditModal.value = true; 
+  selectedProduct.value = { ...productData };
+  showEditModal.value = true;
 };
 
-
+// Open Detail Modal
 const openDetailModal = (productData) => {
-  selectedProduct.value = { ...productData }; 
+  selectedProduct.value = { ...productData };
   showDetailModal.value = true;
 };
 
-
+// Close Detail Modal
 const closeDetailModal = () => {
   showDetailModal.value = false;
 };
 
-
+// Close Edit Modal
 const closeEditModal = () => {
   showEditModal.value = false;
 };
 
-
+// Edit the product
 const editProduct = (updatedProduct) => {
   const index = products.value.findIndex(p => p.id === updatedProduct.id);
   if (index !== -1) {
-    products.value[index] = { ...updatedProduct }; 
+    products.value[index] = { ...updatedProduct };
   }
   closeEditModal();
 };
 
+// Load products when the component is mounted
 onMounted(loadProducts);
 </script>
 
@@ -195,7 +203,8 @@ onMounted(loadProducts);
 textarea.form-control {
   resize: none;
 }
-.row{
+
+.row {
   font-weight: 100;
 }
 </style>
