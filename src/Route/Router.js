@@ -40,12 +40,12 @@ export const routes = [
    component: AddOrder,
  },
  {
-   path: '/order-edit/:id',
+   path: '/orders/edit',
    name: 'order-edit',
    component: EditOrder,
  },
  {
-   path: '/order-view/:id',
+   path: '/orders/view',
    name: 'order-view',
    component: OrderDetail,
  },
