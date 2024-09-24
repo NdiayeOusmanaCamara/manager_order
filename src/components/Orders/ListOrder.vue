@@ -71,8 +71,12 @@ const confirmDelete = (order) => {
 };
 
 const deleteOrder = (order) => {
-  orders.value = orders.value.filter(o => o.trackNumber !== order.trackNumber);
-  console.log("Order deleted:", order);
+  if (orders.value.length > 1) {
+    orders.value = orders.value.filter(o => o.trackNumber !== order.trackNumber);
+    console.log("Order deleted:", order);
+  } else {
+    alert("You cannot delete the last remaining order.");
+  }
 };
 
 const goToEditOrder = (order) => {
