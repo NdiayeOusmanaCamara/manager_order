@@ -2,7 +2,7 @@
     <div class="container mt-4">
       <h2 class="mb-4 mt-4">List of Orders</h2>
       <div class="d-flex justify-content-end">
-        <router-link class="btn btn-primary mb-3" to="/add-order">Add New Order</router-link>
+        <router-link class="btn btn-primary mb-3"  :to="{ name: 'order-add' }">Add New Order</router-link>
       </div>
      
       <table class="table table-striped">

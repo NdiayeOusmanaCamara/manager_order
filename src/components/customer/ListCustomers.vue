@@ -17,7 +17,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(customer) in customers" :key="customer.id">
+        <!-- Check if the customers array is empty -->
+        <tr v-if="customers.length === 0">
+          <td colspan="5" class="text-center">No customers available</td>
+        </tr>
+        <!-- Display customers if available -->
+        <tr v-else v-for="(customer) in customers" :key="customer.id">
           <td>{{ customer.name }}</td>
           <td>{{ customer.address }}</td>
           <td>{{ customer.email }}</td>

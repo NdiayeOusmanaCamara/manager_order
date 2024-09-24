@@ -35,7 +35,7 @@ export const routes = [
     component: ListOrder,
   },
   {
-   path: '/add-order',  
+   path: '/orders/create',  
    name: 'order-add',
    component: AddOrder,
  },

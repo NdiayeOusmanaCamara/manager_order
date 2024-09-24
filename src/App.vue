@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar navbar-expand-lg bg-light">
     <div class="container">
       <!-- Toggle button for mobile view -->
       <button
@@ -18,17 +18,30 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/">
+            <RouterLink
+              class="nav-link"
+              :class="{ active: route.path === '/' }"
+              to="/"
+            >
               <i class="bi bi-people"></i> Customers
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/products">
-              <i class="bi bi-box-seam"></i> Products
+            <RouterLink
+              class="nav-link"
+              :class="{ active: route.path === '/products' }"
+              to="/products"
+            >
+              <i class="bi bi-box-seam "></i> Products
             </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/orders">
+            
+            <RouterLink
+              class="nav-link"
+              :class="{ active: route.path.startsWith('/orders') }"
+              to="/orders"
+            >
               <i class="bi bi-cart"></i> Orders
             </RouterLink>
           </li>
@@ -42,9 +55,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router'; // Import useRoute
 
 const isNavbarVisible = ref(false);
+const route = useRoute(); // Use useRoute to get the current route
 
 function toggleNavbar() {
   isNavbarVisible.value = !isNavbarVisible.value;
@@ -58,18 +72,19 @@ body {
 }
 
 .nav-link {
-  color: #ffffff;
+  color: #393030;
   font-size: large;
   transition: color 0.3s ease-in-out;
 }
 
-.nav-link:hover {
-  color: #c1d1e9;
+.nav-link.active {
+  color: #0056b3; /* Couleur pour indiquer l'état actif */
+  border-radius: 5px; /* Optionnel : arrondi des coins pour un meilleur style */
 }
 
 .nav-link i {
   margin-right: 8px;
-  font-size: 24px; /* Adjust icon size */
+  font-size: 24px; 
 }
 
 .navbar {
