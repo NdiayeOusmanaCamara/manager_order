@@ -23,7 +23,7 @@
               :class="{ active: route.path === '/' }"
               to="/"
             >
-              <i class="bi bi-people"></i> Customers
+              <i class="fas fa-users"></i> Customers
             </RouterLink>
           </li>
           <li class="nav-item">
@@ -32,7 +32,7 @@
               :class="{ active: route.path === '/products' }"
               to="/products"
             >
-              <i class="bi bi-box-seam "></i> Products
+              <i class="fas fa-box-open mt-2 "></i> Products
             </RouterLink>
           </li>
           <li class="nav-item">
@@ -42,7 +42,7 @@
               :class="{ active: route.path.startsWith('/orders') }"
               to="/orders"
             >
-              <i class="bi bi-cart"></i> Orders
+              <i class="fas fa-shopping-cart"></i> Orders
             </RouterLink>
           </li>
         </ul>
@@ -84,7 +84,7 @@ body {
 
 .nav-link i {
   margin-right: 8px;
-  font-size: 24px; 
+  font-size: 15px; 
 }
 
 .navbar {
